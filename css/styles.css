@@ -22,7 +22,7 @@ body{
     transition: all 0.5s ease;
 } */
 
-.wrapper .right-sidebar{
+.right-sidebar{
     background: rgb(5, 68, 104);
     position: fixed;
     top: 0;
@@ -64,3 +64,14 @@ body{
       display: flex;
   }
   
+  .column {
+    float: left;
+  }
+  
+  .left, .right {
+    width: 25%;
+  }
+  
+  .middle {
+    width: 50%;
+  }
