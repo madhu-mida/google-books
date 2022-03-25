@@ -66,6 +66,7 @@ body{
   
   .column {
     float: left;
+    padding: 10px;
   }
   
   .left, .right {
@@ -74,4 +75,9 @@ body{
   
   .middle {
     width: 50%;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
   }

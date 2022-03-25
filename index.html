@@ -6,35 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+        </script>
     <script src="./js/app.js" defer></script>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
-    <header>
-        <h1 class="top-header">Book App</h1>
-    </header>
+
 
     <div class="row">
-        <div class="column">
+        <div class="column left">
             <div class="sidenav">
                 <div class="nav-links">
-                    <a href="#fiction">Fiction</a>
-                    <a href="#thriller">Thriller</a>
-                    <a href="#action">Action and Adventure</a>
-                    <a href="#fantasy">Fantasy</a>
-                    <a href="#scifi">Sci-Fi</a>
-                    <a href="#mystery">Mystery</a>
-                    <a href="#horror">Horror</a>
+                    <a class="navigationKey" id="fiction" href="#fiction">Fiction</a>
+                    <a class="navigationKey" id="nonfiction" href="#nonfiction">Non-Fiction</a>
+                    <a class="navigationKey" id="sports" href="#sports">Sports</a>
+                    <a class="navigationKey" id="health" href="#health">Health</a>
+                    <a class="navigationKey" id="science" href="#science">Science</a>
+                    <a class="navigationKey" id="travel" href="#travel">Travel</a>
+                    <a class="navigationKey" id="politics" href="#politics">Politics</a>
+                    <a class="navigationKey" id="food" href="#food">Food and Fitness</a>
+                    <a class="navigationKey" id="business" href="#business">Business</a>
                 </div>
             </div>
         </div>
-        <div class="column">
+        <div class="column middle">
+            <header>
+                <h1 class="top-header">Book App</h1>
+            </header>
             <div class="content">
 
             </div>
         </div>
-        <div class="column">
+        <div class="column right">
             <div class="right-sidebar">
 
             </div>
