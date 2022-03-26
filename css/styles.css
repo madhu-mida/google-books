@@ -70,11 +70,15 @@ body{
   }
   
   .left, .right {
-    width: 25%;
+    width: 15%;
   }
   
   .middle {
-    width: 50%;
+    width: 70%;
+  }
+  .category-image-content {
+    width: 80%;
+    margin: auto;
   }
   .row:after {
     content: "";
@@ -87,3 +91,64 @@ body{
     width: 200px;
     margin-right: 40px;
   }
+
+  .carousel {
+    height: 250px;
+    position: relative;
+  }
+
+  .carousel .switchLeft,
+  .carousel .switchRight {
+    color: white;
+    font-weight: bold;
+    height: 100%;
+    width: 45px;
+    line-height: 250px;
+    font-size: 25px;
+    text-align: center;
+    background-color: lightgreen;
+    font-family: sans-serif;
+    top: 0;
+    z-index: 3;
+  }
+  .carousel .switchLeft {
+    position: absolute;
+    left: -50px;
+    cursor: pointer;
+  }
+
+  .carousel .switchRight {
+    position: absolute;
+    right: -50px;
+    cursor: pointer;
+  }
+
+  .carouselbox {
+    height: 250px;
+    width: auto;
+    overflow: scroll;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 10px !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .carouselbox img {
+    min-width: 147px;
+    max-width: 147px;
+    height: 200px;
+    background-size: cover;
+    background-color: lightgreen;
+    margin: 5px 10px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 2;
+  }
+
+  .carouselbox img:hover {
+    transform: scale(1.4);
+    z-index: 5;
+  }
+

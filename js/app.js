@@ -2,6 +2,14 @@ console.log("Js Running")
 
 const $navigationKeys = $(".navigationKey")
 const $imageContent = $(".category-image-content")
+const $carouselBox = $(".carouselbox")
+const $switchLeftButton = $(".switchLeft")
+const $switchRightButton = $(".switchRight")
+
+let scrollPerClick;
+let imagePadding = 20;
+
+let scrollAmount = 0;
 
 console.log($navigationKeys)
 
@@ -32,12 +40,12 @@ $navigationKeys.each((index, element) => {
             $categoryName = "Hardcover Business Books"
         }
 
-        $imageContent.empty()
+        //$imageContent.empty()
         $.ajax(`https://api.nytimes.com/svc/books/v3/lists.json?list=${$categoryName}&api-key=l7mogI8Uw1dmPCRYM2agAAxa58Q1LszR`)
             .then((data) => {
                 console.log(data)
                 console.log(data.results)
-                $booksArrayBS = data.results.slice(0, 3)
+                $booksArrayBS = data.results
                 console.log($booksArrayBS)
                 $booksArrayBS.forEach((element) => {
                     $bookDetailsArrayBS.push(element.book_details[0])
@@ -51,18 +59,51 @@ $navigationKeys.each((index, element) => {
                     //     $googleBooksArray.push(data.items[0])
                     // })
                     //console.log(ajaxResp.responseJSON.items[0]);
-                    $googleBooksArray.push(ajaxResp.responseJSON.items[0])
+                    if (ajaxResp.responseJSON.items && ajaxResp.responseJSON.items.length > 0) {
+                        $googleBooksArray.push(ajaxResp.responseJSON.items[0])
+                    }
+
                 });
 
                 console.log($googleBooksArray)
-                $googleBooksArray.forEach(element => {
-                    $imageContent.append(`<img class="bs-images" src="${element.volumeInfo.imageLinks.thumbnail}" alt="${element.volumeInfo.readingModes.title}">`)
+                $googleBooksArray.forEach((element, index) => {
+                    $carouselBox.append(`<img class="img-${index} slider-img" src="${element.volumeInfo.imageLinks.thumbnail}" alt="${element.volumeInfo.readingModes.title}">`)
 
                 });
+
+                scrollPerClick = document.querySelector(".img-1").clientWidth + imagePadding;
 
             })
     })
 });
 
+function sliderScrollLeft() {
+    $carouselBox[0].scrollTo({
+        //top: 0,
+        left: (scrollAmount -= scrollPerClick),
+        behavior: "smooth"
+    })
+    if (scrollAmount < 0) {
+        scrollAmount = 0
+    }
+}
+
+function sliderScrollRight() {
+    console.log(scrollAmount, $carouselBox[0].scrollWidth, $carouselBox[0].clientWidth)
+    if (scrollAmount <= $carouselBox[0].scrollWidth - $carouselBox[0].clientWidth) {
+        $carouselBox[0].scrollTo({
+            //top: 0,
+            left: (scrollAmount += scrollPerClick),
+            behavior: "smooth"
+        })
+    }
+}
+
+$switchLeftButton.on("click", () => {
+    sliderScrollLeft()
+})
+$switchRightButton.on("click", () => {
+    sliderScrollRight()
+})
 //volumeInfo.imageLinks
 //readingModes.title
