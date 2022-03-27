@@ -184,3 +184,33 @@ body{
   .book-search button:hover {
     background: #0b7dda;
   }
+
+  .wrapper-images {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* grid-auto-rows: 200px; */
+    row-gap: 1em;
+  }
+
+  .books-content {
+    margin: 20px;
+    height: 200px;
+    width: 150px;
+    border-radius: 8px;
+  }
+
+  .books-display {
+    display: flex;
+    justify-content: center;
+  }
+
+  .book-tile {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-title {
+    justify-content: center;
+  }

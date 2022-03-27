@@ -1,5 +1,5 @@
 console.log("Js Running")
-
+//&key=AIzaSyClZMkawW_kK7MKniOI3CIjEXAJJqp8Wxg
 $(document).ready(function () {
     console.log("ready!");
     loadBestSellers("Travel")
@@ -12,6 +12,8 @@ const $switchLeftButton = $(".switchLeft")
 const $switchRightButton = $(".switchRight")
 const $searchBox = $("input[type=text]")
 const $searchButton = $("button")
+const $booksDisplayContent = $(".books-display")
+const $wrappedImages = $(".wrapper-images")
 
 let scrollPerClick;
 let imagePadding = 20;
@@ -69,7 +71,7 @@ function loadBestSellers($categoryName) {
             let $googleBooksArray = []
             console.log($bookDetailsArrayBS)
             $bookDetailsArrayBS.forEach(element => {
-                let ajaxResp = $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${element.title}+isbn:${element.primary_isbn13}&key=AIzaSyClZMkawW_kK7MKniOI3CIjEXAJJqp8Wxg`, { async: false });
+                let ajaxResp = $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${element.title}+isbn:${element.primary_isbn13}`, { async: false });
                 // .then((data) => {
                 //     // console.log(data)
                 //     $googleBooksArray.push(data.items[0])
@@ -125,6 +127,24 @@ $switchRightButton.on("click", () => {
 
 $searchButton.on("click", (event) => {
     console.log($searchBox.val())
+    let $inputText = $searchBox.val()
+    $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${$inputText}&maxResults=15`)
+        .then((data) => {
+            console.log(data)
+            data.items.forEach((element, index) => {
+                console.log(element.volumeInfo.imageLinks.thumbnail)
+                console.log(element.volumeInfo.title)
+                console.log(element.volumeInfo.publishedDate)
+                console.log(element.volumeInfo.description)
+                $wrappedImages.append(`<div class="book-tile">
+                <img class="books-content" src="${element.volumeInfo.imageLinks.thumbnail}"
+                    alt="${element.volumeInfo.title}" />
+                <h4 class="book-title">${element.volumeInfo.title}</h4>
+                <h5><i>Published Date: </i>${element.volumeInfo.publishedDate}</h5>
+            </div>`)
+
+            });
+        })
 })
 
 
