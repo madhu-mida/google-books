@@ -8,7 +8,7 @@
 }
 
 body{
-    background: #f5f6fa;
+    background: #b0b1b3;
 }
 
 /* .wrapper .left-sidebar{
@@ -101,14 +101,15 @@ body{
   .carousel .switchRight {
     color: white;
     font-weight: bold;
-    height: 100%;
+    /* height: 100%; */
     width: 45px;
-    line-height: 250px;
+    /* line-height: 250px; */
     font-size: 25px;
     text-align: center;
-    background-color: lightgreen;
+    background-color: rgb(5, 68, 104);
     font-family: sans-serif;
-    top: 0;
+    /* top: 0; */
+    top: 42%;
     z-index: 3;
   }
   .carousel .switchLeft {
@@ -152,3 +153,34 @@ body{
     z-index: 5;
   }
 
+  .book-search {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .book-search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid gray;
+    float:left;
+    width: 50%;
+    /* max-width: 800px; */
+    background: #f1f1f1;
+  }
+  
+  .book-search button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid gray;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+
+  .book-search button:hover {
+    background: #0b7dda;
+  }

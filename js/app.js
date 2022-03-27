@@ -1,10 +1,17 @@
 console.log("Js Running")
 
+$(document).ready(function () {
+    console.log("ready!");
+    loadBestSellers("Travel")
+});
+
 const $navigationKeys = $(".navigationKey")
 const $imageContent = $(".category-image-content")
 const $carouselBox = $(".carouselbox")
 const $switchLeftButton = $(".switchLeft")
 const $switchRightButton = $(".switchRight")
+const $searchBox = $("input[type=text]")
+const $searchButton = $("button")
 
 let scrollPerClick;
 let imagePadding = 20;
@@ -18,8 +25,7 @@ $navigationKeys.each((index, element) => {
     $(element).on("click", function (event) {
         console.log(event.target.id)
         let $categoryName
-        let $booksArrayBS = []
-        let $bookDetailsArrayBS = []
+
         if (event.target.id === "fiction") {
             $categoryName = "Hardcover Fiction"
         } else if (event.target.id === "nonfiction") {
@@ -41,41 +47,50 @@ $navigationKeys.each((index, element) => {
         }
 
         //$imageContent.empty()
-        $.ajax(`https://api.nytimes.com/svc/books/v3/lists.json?list=${$categoryName}&api-key=l7mogI8Uw1dmPCRYM2agAAxa58Q1LszR`)
-            .then((data) => {
-                console.log(data)
-                console.log(data.results)
-                $booksArrayBS = data.results
-                console.log($booksArrayBS)
-                $booksArrayBS.forEach((element) => {
-                    $bookDetailsArrayBS.push(element.book_details[0])
-                });
-                let $googleBooksArray = []
-                console.log($bookDetailsArrayBS)
-                $bookDetailsArrayBS.forEach(element => {
-                    let ajaxResp = $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${element.title}+isbn:${element.primary_isbn13}&key=AIzaSyClZMkawW_kK7MKniOI3CIjEXAJJqp8Wxg`, { async: false });
-                    // .then((data) => {
-                    //     // console.log(data)
-                    //     $googleBooksArray.push(data.items[0])
-                    // })
-                    //console.log(ajaxResp.responseJSON.items[0]);
-                    if (ajaxResp.responseJSON.items && ajaxResp.responseJSON.items.length > 0) {
-                        $googleBooksArray.push(ajaxResp.responseJSON.items[0])
-                    }
 
-                });
-
-                console.log($googleBooksArray)
-                $googleBooksArray.forEach((element, index) => {
-                    $carouselBox.append(`<img class="img-${index} slider-img" src="${element.volumeInfo.imageLinks.thumbnail}" alt="${element.volumeInfo.readingModes.title}">`)
-
-                });
-
-                scrollPerClick = document.querySelector(".img-1").clientWidth + imagePadding;
-
-            })
+        loadBestSellers($categoryName)
     })
 });
+
+function loadBestSellers($categoryName) {
+    $carouselBox.empty()
+    // Carousel Buffering
+    let $booksArrayBS = []
+    let $bookDetailsArrayBS = []
+    $.ajax(`https://api.nytimes.com/svc/books/v3/lists.json?list=${$categoryName}&api-key=l7mogI8Uw1dmPCRYM2agAAxa58Q1LszR`)
+        .then((data) => {
+            console.log(data)
+            console.log(data.results)
+            $booksArrayBS = data.results
+            console.log($booksArrayBS)
+            $booksArrayBS.forEach((element) => {
+                $bookDetailsArrayBS.push(element.book_details[0])
+            });
+            let $googleBooksArray = []
+            console.log($bookDetailsArrayBS)
+            $bookDetailsArrayBS.forEach(element => {
+                let ajaxResp = $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${element.title}+isbn:${element.primary_isbn13}&key=AIzaSyClZMkawW_kK7MKniOI3CIjEXAJJqp8Wxg`, { async: false });
+                // .then((data) => {
+                //     // console.log(data)
+                //     $googleBooksArray.push(data.items[0])
+                // })
+                //console.log(ajaxResp.responseJSON.items[0]);
+                if (ajaxResp.responseJSON.items && ajaxResp.responseJSON.items.length > 0) {
+                    $googleBooksArray.push(ajaxResp.responseJSON.items[0])
+                }
+
+            });
+
+            console.log($googleBooksArray)
+            $googleBooksArray.forEach((element, index) => {
+                $carouselBox.append(`<img class="img-${index} slider-img" src="${element.volumeInfo.imageLinks.thumbnail}" alt="${element.volumeInfo.readingModes.title}">`)
+
+            });
+
+            scrollPerClick = document.querySelector(".img-1").clientWidth + imagePadding;
+
+        })
+}
 
 function sliderScrollLeft() {
     $carouselBox[0].scrollTo({
@@ -107,3 +122,9 @@ $switchRightButton.on("click", () => {
 })
 //volumeInfo.imageLinks
 //readingModes.title
+
+$searchButton.on("click", (event) => {
+    console.log($searchBox.val())
+})
+
+
