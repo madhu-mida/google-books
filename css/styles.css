@@ -68,6 +68,7 @@ body{
       background-color:darkgray;
       height: 50px;
       font-family: 'Londrina Shadow', cursive;
+      z-index: 100;
   }
   
   .column {
@@ -286,4 +287,17 @@ body{
     width: 1rem;
     height: 1rem;
     background: white;
+  }
+
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    /* width: 100%; */
+    width: 70%;
+  }
+
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
   }

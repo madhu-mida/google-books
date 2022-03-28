@@ -152,4 +152,26 @@ $searchButton.on("click", (event) => {
         })
 })
 
+const $navBar = $(".top-header")
+let sticky = $navBar.offset().top;
+
+
+window.onscroll = function () {
+    console.log("onScroll")
+    stickyNavigation()
+}
+
+function stickyNavigation() {
+    console.log(window.pageYOffset)
+    console.log(sticky)
+    if (window.pageYOffset >= sticky) {
+        console.log("adding sticky")
+        // $navBar.classList.add("sticky")
+        $navBar.addClass("sticky")
+    } else {
+        console.log("removing sticky")
+        // $navBar.classList.remove("sticky")
+        $navBar.removeClass("sticky")
+    }
+}
 
