@@ -127,6 +127,7 @@ $switchRightButton.on("click", () => {
 
 $searchButton.on("click", (event) => {
     console.log($searchBox.val())
+    $wrappedImages.empty()
     let $inputText = $searchBox.val()
     $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${$inputText}&maxResults=15`)
         .then((data) => {
@@ -137,8 +138,12 @@ $searchButton.on("click", (event) => {
                 console.log(element.volumeInfo.publishedDate)
                 console.log(element.volumeInfo.description)
                 $wrappedImages.append(`<div class="book-tile">
+                <div class="tooltip">
                 <img class="books-content" src="${element.volumeInfo.imageLinks.thumbnail}"
-                    alt="${element.volumeInfo.title}" />
+                    alt="${element.volumeInfo.title}" >
+                    <span class="tooltiptext truncate-overflow">${element.volumeInfo.description}</span>
+                    </img>
+                </div>
                 <h4 class="book-title">${element.volumeInfo.title}</h4>
                 <h5><i>Published Date: </i>${element.volumeInfo.publishedDate}</h5>
             </div>`)

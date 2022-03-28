@@ -8,7 +8,7 @@
 }
 
 body{
-    background: #b0b1b3;
+    background: #161616;
 }
 
 /* .wrapper .left-sidebar{
@@ -62,6 +62,12 @@ body{
       text-align: center;
       justify-content: center;
       display: flex;
+      /* font:40px Courier, monospace; */
+      font-size: 40px;
+      color: black;
+      background-color:darkgray;
+      height: 50px;
+      font-family: 'Londrina Shadow', cursive;
   }
   
   .column {
@@ -209,8 +215,75 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
   }
 
   .book-title {
     justify-content: center;
+  }
+
+  
+
+  .tooltip {
+    position: relative;
+    /* display: inline-block;
+    border-bottom: 1px dotted black; */
+  }
+
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 500px;
+    height: 500px;
+    background-color: whitesmoke;
+    color: #818181;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    /* bottom: 100%;
+    left: 50%; */
+    top: -5px;
+    left: 105%;
+    margin-left: -60px;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+
+    border-radius: 8px;
+    font-style: italic;
+    box-shadow:5px 5px 8px #ccc;
+    font:12px Arial, Helvetica, sans-serif;
+    border:1px solid #DCA;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    
+  }
+
+  .truncate-overflow {
+    --max-lines: 3;
+    --lh: 1.25rem;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+  }
+
+  .truncate-overflow::before {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .truncate-overflow::after {
+    content: "";
+    position: absolute;
+    right: 0; /* note: not using bottom */
+    width: 1rem;
+    height: 1rem;
+    background: white;
   }
