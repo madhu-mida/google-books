@@ -8,7 +8,17 @@
 }
 
 body{
-    background: #161616;
+  background-image: linear-gradient(black,gray);
+  background-attachment: fixed;
+}
+
+.grad, .wrapper-images{
+  /* background-image: linear-gradient(black,gray); */
+}
+
+.books-display {
+  margin-top: 20px;
+
 }
 
 /* .wrapper .left-sidebar{
@@ -23,7 +33,8 @@ body{
 } */
 
 .right-sidebar{
-    background: rgb(5, 68, 104);
+    /* background: rgb(5, 68, 104); */
+    background-image: linear-gradient(to right, rgb(5, 68, 104), rgb(3, 41, 63));
     position: fixed;
     top: 0;
     right: 0;
@@ -41,7 +52,8 @@ body{
     z-index: 1;
     top: 0;
     left: 0;
-    background: rgb(5, 68, 104);
+    /* background: rgb(5, 68, 104); */
+    background-image: linear-gradient(to right, rgb(5, 68, 104), rgb(3, 41, 63));
     overflow-x: hidden;
     /* display: flex; */
   }
@@ -113,7 +125,7 @@ body{
     /* line-height: 250px; */
     font-size: 25px;
     text-align: center;
-    background-color: rgb(5, 68, 104);
+    background-color: rgb(50, 52, 53);
     font-family: sans-serif;
     /* top: 0; */
     top: 42%;
@@ -180,7 +192,7 @@ body{
     float: left;
     width: 20%;
     padding: 10px;
-    background: #2196F3;
+    background: rgb(5, 68, 104);
     color: white;
     font-size: 17px;
     border: 1px solid gray;
@@ -221,6 +233,7 @@ body{
 
   .book-title {
     justify-content: center;
+    text-align: center;
   }
 
   
