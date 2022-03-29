@@ -114,6 +114,7 @@ body{
   .carousel {
     height: 250px;
     position: relative;
+    margin: 30px;
   }
 
   .carousel .switchLeft,
@@ -165,11 +166,16 @@ body{
     cursor: pointer;
     transition: 0.5s ease;
     z-index: 2;
+    border-radius: 8px;
   }
 
   .carouselbox img:hover {
     transform: scale(1.4);
     z-index: 5;
+  }
+
+  .sliderButton {
+    margin-right: -12px;
   }
 
   .book-search {
@@ -213,8 +219,11 @@ body{
 
   .books-content {
     margin: 20px;
+    /* height: 200px;
+    width: 150px; */
+    min-width: 147px;
+    max-width: 147px;
     height: 200px;
-    width: 150px;
     border-radius: 8px;
   }
 
@@ -229,13 +238,24 @@ body{
     flex-direction: column;
     align-items: center;
     color: white;
+    
   }
 
   .book-title {
     justify-content: center;
     text-align: center;
+    font-size: 12px;
+    font-family: 'Bitter', serif;
   }
 
+  .book-title-pd {
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+    font-family: 'Bitter', serif;
+    font-style: italic;
+    padding: 5px;
+  }
   
 
   .tooltip {

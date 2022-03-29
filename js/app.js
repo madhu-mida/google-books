@@ -145,7 +145,7 @@ $searchButton.on("click", (event) => {
                     </img>
                 </div>
                 <h4 class="book-title">${element.volumeInfo.title}</h4>
-                <h5><i>Published Date: </i>${element.volumeInfo.publishedDate}</h5>
+                <h6 class="book-title-pd">Published Date: ${element.volumeInfo.publishedDate}</h5>
             </div>`)
 
             });
