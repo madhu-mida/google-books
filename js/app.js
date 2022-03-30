@@ -154,7 +154,7 @@ $searchButton.on("click", (event) => {
                         <span class="tooltiptext truncate-overflow">${element.volumeInfo.description}</span>
                         </img>
                     </div>
-                    <h4 class="book-title">${element.volumeInfo.title}</h4>
+                    <a class="book-link" href="${element.volumeInfo.canonicalVolumeLink}" target="_blank"><h4 class="book-title">${element.volumeInfo.title}</h4></a>
                     <h6 class="book-title-pd">Published Date: ${element.volumeInfo.publishedDate}</h5>
                     <span class="heart"><i class="fa ${$favIcon}" aria-hidden="true"></i> </span>
 
