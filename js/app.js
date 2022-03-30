@@ -18,6 +18,7 @@ const $booksDisplayContent = $(".books-display")
 const $wrappedImages = $(".wrapper-images")
 const $favouriteList = $(".favorites-list")
 const $clearButton = $("#clear-button")
+const $bestSellerCategorySpan = $("#bs-category")
 
 let scrollPerClick;
 let imagePadding = 20;
@@ -58,6 +59,7 @@ $navigationKeys.each((index, element) => {
         //$imageContent.empty()
 
         loadBestSellers($categoryName)
+        $bestSellerCategorySpan.html((event.target.text))
     })
 });
 

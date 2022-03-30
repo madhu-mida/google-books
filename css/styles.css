@@ -98,6 +98,17 @@ body{
     width: 80%;
     margin: auto;
   }
+
+  .bs-heading {
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  #bs-category {
+    text-transform: capitalize;
+  }
+
   .row:after {
     content: "";
     display: table;
