@@ -5,6 +5,8 @@ $(document).ready(function () {
     loadBestSellers("Travel")
 });
 
+myStorage = window.localStorage;
+
 const $navigationKeys = $(".navigationKey")
 const $imageContent = $(".category-image-content")
 const $carouselBox = $(".carouselbox")
@@ -19,6 +21,9 @@ let scrollPerClick;
 let imagePadding = 20;
 
 let scrollAmount = 0;
+
+let $favoriteListArray = myStorage.getItem("favoriteBooks") ? myStorage.getItem("favoriteBooks").split(",") : []
+
 
 console.log($navigationKeys)
 
@@ -133,36 +138,48 @@ $searchButton.on("click", (event) => {
         .then((data) => {
             console.log(data)
             data.items.forEach((element, index) => {
-                console.log(element.volumeInfo.imageLinks.thumbnail)
-                console.log(element.volumeInfo.title)
-                console.log(element.volumeInfo.publishedDate)
-                console.log(element.volumeInfo.description)
-                $wrappedImages.append(`<div class="book-tile">
-                <div class="tooltip">
-                <img class="books-content" src="${element.volumeInfo.imageLinks.thumbnail}"
-                    alt="${element.volumeInfo.title}" >
-                    <span class="tooltiptext truncate-overflow">${element.volumeInfo.description}</span>
-                    </img>
-                </div>
-                <h4 class="book-title">${element.volumeInfo.title}</h4>
-                <h6 class="book-title-pd">Published Date: ${element.volumeInfo.publishedDate}</h5>
-                <span class="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+                if (element.volumeInfo.imageLinks && element.volumeInfo.imageLinks.thumbnail) {
+                    console.log(element.volumeInfo.imageLinks)
+                    console.log(element.volumeInfo.title)
+                    console.log(element.volumeInfo.publishedDate)
+                    console.log(element.volumeInfo.description)
+                    let $isLiked = $favoriteListArray.includes(element.volumeInfo.title) ? "liked" : ""
+                    let $favIcon = $favoriteListArray.includes(element.volumeInfo.title) ? "fa-heart" : "fa-heart-o"
+                    $wrappedImages.append(`<div class="book-tile ${$isLiked}">
+                    <div class="tooltip">
+                    <img class="books-content" src="${element.volumeInfo.imageLinks.thumbnail}"
+                        alt="${element.volumeInfo.title}" >
+                        <span class="tooltiptext truncate-overflow">${element.volumeInfo.description}</span>
+                        </img>
+                    </div>
+                    <h4 class="book-title">${element.volumeInfo.title}</h4>
+                    <h6 class="book-title-pd">Published Date: ${element.volumeInfo.publishedDate}</h5>
+                    <span class="heart"><i class="fa ${$favIcon}" aria-hidden="true"></i> </span>
 
-            </div>`)
-
+                </div>`)
+                }
             });
+
 
             $(".heart").click(function (event) {
                 console.log($(this.parentNode))
+                let $selectedBook = $(this.parentNode).children(".book-title").text()
                 if ($(this.parentNode).hasClass("liked")) {
                     $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
                     //remove from localstorage
+                    $favoriteListArray.splice($favoriteListArray.indexOf($selectedBook), 1);
                 } else {
                     $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
                     //add to localstorage
+                    $favoriteListArray.push($selectedBook)
+
                 }
                 $(this.parentNode).toggleClass("liked");
+                //console.log("re", $(this.parentNode).children(".book-title").text())
+                console.log($favoriteListArray)
+                myStorage.setItem("favoriteBooks", $favoriteListArray)
             });
+
         })
 })
 
@@ -189,15 +206,6 @@ function stickyNavigation() {
     }
 }
 
-$(document).ready(function () {
 
-});
 
-// $(document).ready(function () {
-
-//     $('.like-button').click(function () {
-//         $(this).toggleClass('is-active');
-//     })
-
-// })
 
