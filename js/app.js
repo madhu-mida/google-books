@@ -35,9 +35,9 @@ $navigationKeys.each((index, element) => {
     $(element).on("click", function (event) {
         console.log(event.target.id)
         let $categoryName
-
+        // Checking which link has been clicked using target.id
         if (event.target.id === "fiction") {
-            $categoryName = "Hardcover Fiction"
+            $categoryName = "Hardcover Fiction" //nyt - listNames
         } else if (event.target.id === "nonfiction") {
             $categoryName = "Hardcover Nonfiction"
         } else if (event.target.id === "sports") {
@@ -70,29 +70,29 @@ function loadBestSellers($categoryName) {
     let $bookDetailsArrayBS = []
     $.ajax(`https://api.nytimes.com/svc/books/v3/lists.json?list=${$categoryName}&api-key=l7mogI8Uw1dmPCRYM2agAAxa58Q1LszR`)
         .then((data) => {
-            console.log(data)
-            console.log(data.results)
+            console.log("NYT Data ", data)
+            console.log("NYT Data.Results ", data.results)
             $booksArrayBS = data.results
-            console.log($booksArrayBS)
+            console.log("BooksArrayBS ", $booksArrayBS)
             $booksArrayBS.forEach((element) => {
                 $bookDetailsArrayBS.push(element.book_details[0])
             });
             let $googleBooksArray = []
-            console.log($bookDetailsArrayBS)
+            console.log("BookDetailsArray ", $bookDetailsArrayBS)
             $bookDetailsArrayBS.forEach(element => {
                 let ajaxResp = $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${element.title}+isbn:${element.primary_isbn13}`, { async: false });
                 // .then((data) => {
                 //     // console.log(data)
                 //     $googleBooksArray.push(data.items[0])
                 // })
-                //console.log(ajaxResp.responseJSON.items[0]);
+                console.log("ResponseJson ", ajaxResp.responseJSON);
                 if (ajaxResp.responseJSON.items && ajaxResp.responseJSON.items.length > 0) {
                     $googleBooksArray.push(ajaxResp.responseJSON.items[0])
                 }
 
             });
 
-            console.log($googleBooksArray)
+            console.log("GoogleBooksArray: ", $googleBooksArray)
             $googleBooksArray.forEach((element, index) => {
                 $carouselBox.append(`<img class="img-${index} slider-img" src="${element.volumeInfo.imageLinks.thumbnail}" alt="${element.volumeInfo.readingModes.title}">`)
 
@@ -115,7 +115,9 @@ function sliderScrollLeft() {
 }
 
 function sliderScrollRight() {
-    console.log(scrollAmount, $carouselBox[0].scrollWidth, $carouselBox[0].clientWidth)
+    console.log("scrollAmount- ", scrollAmount, " $carouselBox[0].scrollWidth- ", $carouselBox[0].scrollWidth, " $carouselBox[0].clientWidth- ", $carouselBox[0].clientWidth)
+    //Scrolled --> scrollAmount
+    //Yet to be scrolled or remaining content--> $carouselBox[0].scrollWidth - $carouselBox[0].clientWidth
     if (scrollAmount <= $carouselBox[0].scrollWidth - $carouselBox[0].clientWidth) {
         $carouselBox[0].scrollTo({
             //top: 0,
@@ -131,22 +133,21 @@ $switchLeftButton.on("click", () => {
 $switchRightButton.on("click", () => {
     sliderScrollRight()
 })
-//volumeInfo.imageLinks
-//readingModes.title
+
 
 $searchButton.on("click", (event) => {
-    console.log($searchBox.val())
+    console.log("Search Box Value: ", $searchBox.val())
     $wrappedImages.empty()
     let $inputText = $searchBox.val()
     $.ajax(`https://www.googleapis.com/books/v1/volumes?q=${$inputText}&maxResults=15`)
         .then((data) => {
-            console.log(data)
+            console.log("Google Api Data: ", data)
             data.items.forEach((element, index) => {
                 if (element.volumeInfo.imageLinks && element.volumeInfo.imageLinks.thumbnail) {
-                    console.log(element.volumeInfo.imageLinks)
-                    console.log(element.volumeInfo.title)
-                    console.log(element.volumeInfo.publishedDate)
-                    console.log(element.volumeInfo.description)
+                    console.log("ImageLinks: ", element.volumeInfo.imageLinks)
+                    console.log("Title: ", element.volumeInfo.title)
+                    console.log("PublishedDate: ", element.volumeInfo.publishedDate)
+                    console.log("Description: ", element.volumeInfo.description)
                     let $isLiked = $favoriteListArray.includes(element.volumeInfo.title) ? "liked" : ""
                     let $favIcon = $favoriteListArray.includes(element.volumeInfo.title) ? "fa-heart" : "fa-heart-o"
                     $wrappedImages.append(`<div class="book-tile ${$isLiked}">
@@ -166,9 +167,10 @@ $searchButton.on("click", (event) => {
 
 
             $(".heart").click(function (event) {
-                console.log($(this.parentNode))
+                console.log("ParentNode: ", $(this.parentNode))
                 let $selectedBook = $(this.parentNode).children(".book-link").text()
                 if ($(this.parentNode).hasClass("liked")) {
+                    // User removing or unliking the book from favorites
                     $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
                     //remove from localstorage
                     $favoriteListArray.splice($favoriteListArray.indexOf($selectedBook), 1);
@@ -178,9 +180,10 @@ $searchButton.on("click", (event) => {
                     $favoriteListArray.push($selectedBook)
 
                 }
+                // Adding or removing the liked class as applicable
                 $(this.parentNode).toggleClass("liked");
                 //console.log("re", $(this.parentNode).children(".book-title").text())
-                console.log($favoriteListArray)
+                console.log("FavoriteListArray", $favoriteListArray)
                 myStorage.setItem("favoriteBooks", $favoriteListArray)
                 $favouriteList.empty()
                 $favoriteListArray.forEach(element => {
@@ -219,6 +222,7 @@ function stickyNavigation() {
     }
 }
 
+//Executes on PageLoad to populate the favorite section
 $favoriteListArray.forEach(element => {
     $favouriteList.append(`<h5>${element}</h5>`)
 });
@@ -230,7 +234,7 @@ if ($favoriteListArray.length <= 0) {
 $clearButton.on("click", () => {
     $favoriteListArray.length = 0
     $favouriteList.empty()
-    myStorage.clear()
+    myStorage.removeItem("favoriteBooks")
     $clearButton.prop("disabled", true)
 })
 
