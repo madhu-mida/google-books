@@ -16,6 +16,8 @@ const $searchBox = $("input[type=text]")
 const $searchButton = $("button")
 const $booksDisplayContent = $(".books-display")
 const $wrappedImages = $(".wrapper-images")
+const $favouriteList = $(".favorites-list")
+const $clearButton = $("#clear-button")
 
 let scrollPerClick;
 let imagePadding = 20;
@@ -178,6 +180,15 @@ $searchButton.on("click", (event) => {
                 //console.log("re", $(this.parentNode).children(".book-title").text())
                 console.log($favoriteListArray)
                 myStorage.setItem("favoriteBooks", $favoriteListArray)
+                $favouriteList.empty()
+                $favoriteListArray.forEach(element => {
+                    $favouriteList.append(`<h5>${element}</h5>`)
+                });
+                if ($favoriteListArray.length > 0) {
+                    $clearButton.prop("disabled", false)
+                } else {
+                    $clearButton.prop("disabled", true)
+                }
             });
 
         })
@@ -206,6 +217,16 @@ function stickyNavigation() {
     }
 }
 
+$favoriteListArray.forEach(element => {
+    $favouriteList.append(`<h5>${element}</h5>`)
+});
+
+$clearButton.on("click", () => {
+    $favoriteListArray.length = 0
+    $favouriteList.empty()
+    myStorage.clear()
+    $clearButton.prop("disabled", true)
+})
 
 
 
