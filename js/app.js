@@ -167,7 +167,7 @@ $searchButton.on("click", (event) => {
 
             $(".heart").click(function (event) {
                 console.log($(this.parentNode))
-                let $selectedBook = $(this.parentNode).children(".book-title").text()
+                let $selectedBook = $(this.parentNode).children(".book-link").text()
                 if ($(this.parentNode).hasClass("liked")) {
                     $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
                     //remove from localstorage
