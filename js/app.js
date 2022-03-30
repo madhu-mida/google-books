@@ -221,6 +221,10 @@ $favoriteListArray.forEach(element => {
     $favouriteList.append(`<h5>${element}</h5>`)
 });
 
+if ($favoriteListArray.length <= 0) {
+    $clearButton.prop("disabled", true)
+}
+
 $clearButton.on("click", () => {
     $favoriteListArray.length = 0
     $favouriteList.empty()
