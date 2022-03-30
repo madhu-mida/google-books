@@ -244,7 +244,7 @@ body{
     text-align: center;
     /* font-size: 12px; */
     font-family: 'Bitter', serif;
-    height: 40px;
+    /* height: 40px; */
   }
 
   .book-title-pd {
@@ -258,6 +258,26 @@ body{
 
   .book-link {
     color: #f1f1f1;
+  }
+
+  .truncate-overflow-title {
+    height: 40px;
+    overflow: hidden;
+  }
+
+  .truncate-overflow-title::before {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .truncate-overflow-title::after {
+    content: "";
+    position: absolute;
+    right: 0; /* note: not using bottom */
+    width: 1rem;
+    height: 1rem;
   }
   
 
