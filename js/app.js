@@ -146,8 +146,22 @@ $searchButton.on("click", (event) => {
                 </div>
                 <h4 class="book-title">${element.volumeInfo.title}</h4>
                 <h6 class="book-title-pd">Published Date: ${element.volumeInfo.publishedDate}</h5>
+                <span class="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+
             </div>`)
 
+            });
+
+            $(".heart").click(function (event) {
+                console.log($(this.parentNode))
+                if ($(this.parentNode).hasClass("liked")) {
+                    $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                    //remove from localstorage
+                } else {
+                    $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                    //add to localstorage
+                }
+                $(this.parentNode).toggleClass("liked");
             });
         })
 })
@@ -174,4 +188,16 @@ function stickyNavigation() {
         $navBar.removeClass("sticky")
     }
 }
+
+$(document).ready(function () {
+
+});
+
+// $(document).ready(function () {
+
+//     $('.like-button').click(function () {
+//         $(this).toggleClass('is-active');
+//     })
+
+// })
 

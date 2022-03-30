@@ -12,9 +12,6 @@ body{
   background-attachment: fixed;
 }
 
-.grad, .wrapper-images{
-  /* background-image: linear-gradient(black,gray); */
-}
 
 .books-display {
   margin-top: 20px;
@@ -334,3 +331,15 @@ body{
   .sticky + .content {
     padding-top: 60px;
   }
+
+  .fa-heart-o {
+    color: red;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  .fa-heart {
+    color: red;
+    cursor: pointer;
+  }
+  
