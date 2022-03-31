@@ -1,11 +1,17 @@
 # BOOK SPACE
 
+### Live Link
+
+https://madhu-mida.github.io/google-books/
+
 ### Technologies: 
 
 - Html
 - Css
 - JavaScript
 - jQuery
+- Google Fonts
+- FontAwesome
 
 ### API:
 
